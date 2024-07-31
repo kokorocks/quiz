@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="color-scheme" content="dark light" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>quiz time</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Quiz time!</h1>
+    <style>h1 {
+      text-decoration: underline;
+    }
+    body {
+      text-align: center;
+    }
+    button {
+      cursor: pointer;
+    }</style>
+    <div id="quiz"></div>
+    <script>
+      let qhistory = [];
+      let history = [];
+      let i = 0;
+      let start = true;
+      const personalities = [
+        "i have no words",
+        "i have no words about how bad it is",
+        "i have no words about how good it is",
+        "you have the personality of a frog",
+        "you have the personality of a dolphin",
+        "you have the personality of a dog",
+        "you have the personality of a cat",
+        "you have the personality of a fly",
+        "you have the personality of a president",
+        "you have the personality of a politian",
+        "you have the personality of a button",
+        "you have the personality of a rock",
+        "you have the personality of a loaf of bread",
+        "you have the personality of a shark",
+        "you have the personality of a pickle",
+      ];
+      const questions = [
+        "What is your favorite color?",
+        "If you had a",
+        "If you could have any superpower, what would it be?",
+        "What’s the most unusual food you’ve ever tried?",
+        "What’s your go-to karaoke song?",
+        "If you could live in any fictional world, which would it be?",
+        "How old are you?",
+        "How old is your pet?",
+        "what is spanish for 'hello there, what is your name?'",
+        "How old is your house",
+        "vroomvroom...bang...run... what just happened",
+        "BANG... were not expecting that, what will you say to me",
+        "If you were a clock what time would it be?",
+        "If you were a car how fast would you go?",
+        "If you were an animal how old would you be?",
+        "How old are you in 72305 years?",
+        "If you were a cow what would you name your pet?",
+        "If i was 10 years old what color is my hair?",
+        "How do you think you look in 100 years?",
+        "Do you like this quiz?",
+        "What do you think of pineapple pizza? (please say 'I hate them')",
+      ];
+      function clear() {
+        document.write(`
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="color-scheme" content="dark light" /><br /><link rel="stylesheet" href="styles.css" />
+          <body><h1>${
+            personalities[Math.floor(Math.random() * personalities.length)]
+          }</h1></body>`);
+      }
+      let stop = false;
+      function generateQuestions() {
+        if (!stop && start) {
+          start = false;
+          //(this.id === i || start) {
+          i++;
+          let randomIndex = Math.floor(Math.random() * questions.length);
+          if (questions.length !== 0) {
+            //qhistory.push(questions[randomIndex]);
+            //history.push(document.getElementById("t").value);
+            i++;
+            document.getElementById(
+              "quiz"
+            ).innerHTML = `<div id='questions'><h2>${questions[randomIndex]}</h2><input placeholder='put your answer here' id='t'><button onclick='generateQuestions()'>send</button></div>`;
+            questions.splice(randomIndex, 1);
+            document.getElementById("t").onchange = function () {
+              if (this.value.trim() !== "") {
+                start = true;
+              } else {
+                start = false;
+              }
+            };
+          } else {
+            stop = true;
+            document.getElementById("quiz").innerHTML =
+              document.getElementById("quiz").innerHTML +
+              "<br /><button id='clear'>see results?</button>";
+            document.getElementById("clear").onclick = function () {
+              clear();
+            };
+          }
+        }
+      }
+      generateQuestions();
+    </script>
+  </body>
+</html>
