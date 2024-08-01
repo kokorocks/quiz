@@ -94,6 +94,11 @@
                 start = false;
               }
             };
+            document.getElementById("t").addEventListener("keyup", (e) => {
+      if (e.key === "Enter") {
+        generateQuestions();
+      }
+    });
           } else {
             stop = true;
             document.getElementById("quiz").innerHTML =
